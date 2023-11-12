@@ -12,8 +12,8 @@ exports.getAllCategories = async (req, res, next) => {
 
 exports.createCategorie = async (req, res, next) => {
   try {
-    const Categorie = await Categorie.create(req.body);
-    res.status(201).json(Categorie);
+    const categorie = await Categorie.create(req.body);
+    res.status(201).json(categorie);
   } catch (error) {
     next(error);
   }

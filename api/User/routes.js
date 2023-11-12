@@ -8,7 +8,9 @@ const {
 const router = express.Router();
 
 router.get("/", getAllUsers);
+// missing the token part
 router.post("/", createUser);
+// extra
 router.put("/:userId", updateUser);
 router.delete("/:userId", deleteUser);
 

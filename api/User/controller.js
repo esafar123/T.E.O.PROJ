@@ -10,6 +10,7 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
+// missing the token part
 exports.createUser = async (req, res, next) => {
   try {
     const user = await User.create(req.body);
@@ -45,6 +46,7 @@ exports.deleteUser = async (req, res, next) => {
 
 exports.addUserToRecipe = async (req, res, next) => {
   try {
+    //user should be got req.user
     const { userID, recipeID } = req.params;
     const user = await User.findById(userID);
     const recipe = await Recipe.findById(recipeID);

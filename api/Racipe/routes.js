@@ -8,6 +8,7 @@ const {
 } = require("./controller");
 const router = express.Router();
 
+// token
 router.get("/", getAllRacipes);
 router.post("/", createRacipe);
 router.put("/:racipesId", updateRacipe);

@@ -1,10 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const RecipeSchema = new Schema({
-  name: String,
+  name: { type: String, required: true },
   username: String,
   //  Image: String,
-  Categories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
+  categorytype: [{ type: Schema.Types.ObjectId, ref: "Category" }],
   Ingredient: String,
 });
 

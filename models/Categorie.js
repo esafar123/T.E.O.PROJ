@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const CategoriosSchema = new Schema({
-  name: String,
+  categoryname: { type: String, required: true },
   //   Image: String,
   Racipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
 });
