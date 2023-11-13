@@ -88,3 +88,20 @@ exports.addUserToRecipe = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.addUserToCategorie = async (req, res, next) => {
+  try {
+    //user should be got req.user
+    const { userID, CategorieID } = req.params;
+    const user = await User.findById(userID);
+    const categorie = await Category.findById(CategorieID);
+    await User.findByIdAndUpdate(userID, {
+      $push: { categorie: Category._id },
+    });
+    await categorie.findByIdAndUpdate(CategorieID, {
+      $push: { users: user._id },
+    });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -9,7 +9,7 @@ const UserSchema = new Schema({
   Bio: String,
   // Birth: { type: Date, required: true, trim: true },
   age: { type: Number, min: 19 },
-  Categories: [{ type: Schema.Types.ObjectId, ref: "Categories" }],
+  Categories: [{ type: Schema.Types.ObjectId, ref: "Category" }], // not here
   Racipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
 });
 

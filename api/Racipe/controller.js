@@ -13,7 +13,8 @@ exports.getAllRacipes = async (req, res, next) => {
 exports.createRacipe = async (req, res, next) => {
   try {
     const recipe = await Recipe.create(req.body);
-    res.status(201).json(recipe);
+    const token = generattoken({ recipe });
+    res.status(201).json({ token });
   } catch (error) {
     next(error);
   }
