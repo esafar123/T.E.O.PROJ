@@ -1,15 +1,22 @@
 const express = require("express");
 const {
-  createUser,
   getAllUsers,
   updateUser,
   deleteUser,
+  signup,
+  signin,
 } = require("./controller");
+const passport = require("passport");
 const router = express.Router();
 
 router.get("/", getAllUsers);
-// missing the token part
-router.post("/", createUser);
+router.post("/signup", signup);
+router.post(
+  "/signin",
+  passport.authenticate("local", { session: false }),
+  signin
+);
+
 // extra
 router.put("/:userId", updateUser);
 router.delete("/:userId", deleteUser);

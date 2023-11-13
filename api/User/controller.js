@@ -1,5 +1,23 @@
+const jwt = require("jsonwebtoken");
 const Recipe = require("../../models/Recipe");
 const User = require("../../models/User");
+const bcrypt = require("bcrypt");
+require("dotenv").config();
+
+const hashedPassword = async (password) => {
+  return await bcrypt.hash(password, 10);
+};
+
+const generattoken = (user) => {
+  const payload = {
+    _id: user._id,
+    username: user.username,
+  };
+  const token = jwt.sign(payload, process.env.jwt_PRIVATE_KEY, {
+    expiresIn: process.env.TAKEN_EXP,
+  });
+  return token;
+};
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -10,11 +28,21 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
-// missing the token part
-exports.createUser = async (req, res, next) => {
+exports.signup = async (req, res, next) => {
   try {
+    req.body.password = await hashedPassword(req.body.password);
     const user = await User.create(req.body);
-    res.status(201).json(user);
+    const token = generattoken({ user });
+    res.status(201).json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.signin = async (req, res, next) => {
+  try {
+    const token = generattoken(req.user);
+    res.json({ token });
   } catch (error) {
     next(error);
   }

@@ -3,19 +3,23 @@ const connectDB = require("./database");
 const userRouter = require("./api/User/routes");
 const racipeRouter = require("./api/Racipe/routes");
 const categorieRouter = require("./api/Categorie/routes");
-const jasonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const morgan = require("morgan");
 const cors = require("cors");
 const { errorHandler } = require("./middleware/errorHandler");
 const multer = require("multer");
 const { notFound } = require("./middleware/notFound");
+const passport = require("passport");
+const localStrategy = require("./middleware/passport");
+
 const app = express();
 require("dotenv").config();
 
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(passport.initialize());
+passport.use("local", localStrategy);
 
 // login, register, getting user from token
 app.use("/api/users", userRouter);
