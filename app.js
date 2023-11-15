@@ -22,9 +22,9 @@ passport.use("local", localStrategy);
 passport.use("jwt", jwtStrategy);
 
 app.use("/api/users", userRouter);
-// missing token
-app.use("/api/racipes", racipeRouter);
-// missing token
+
+app.use("/api/recipes", racipeRouter);
+
 app.use("/api/categories", categorieRouter);
 
 app.use(notFound);

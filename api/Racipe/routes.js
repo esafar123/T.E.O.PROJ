@@ -18,6 +18,6 @@ router.post(
 );
 router.put("/:racipesId", updateRacipe);
 router.delete("/:racipesId", deleteRacipe);
-router.put("/:racipesId/:CategorieId", addRacipeToCategorie);
+// router.put("/:racipesId/:CategorieId", addRacipeToCategorie);
 
 module.exports = router;

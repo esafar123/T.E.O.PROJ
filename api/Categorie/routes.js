@@ -16,9 +16,9 @@ router.put(
   updateCategorie
 );
 // category should never be delted
-router.delete(
-  "/:CategorieId",
-  passport.authenticate("jwt", { session: false }),
-  updateCategorie
-);
+// router.delete(
+//   "/:CategorieId",
+//   passport.authenticate("jwt", { session: false }),
+//   updateCategorie
+// );
 module.exports = router;
