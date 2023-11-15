@@ -18,7 +18,7 @@ router.post(
   signin
 );
 
-// extra
+// extra + where is passport strategy here
 router.put("/:userId", updateUser);
 router.delete("/:userId", deleteUser);
 
