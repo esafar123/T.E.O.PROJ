@@ -9,6 +9,7 @@ const { errorHandler } = require("./middleware/errorHandler");
 const { notFound } = require("./middleware/notFound");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middleware/passport");
+const path = require("path");
 
 const app = express();
 require("dotenv").config();
@@ -16,7 +17,7 @@ require("dotenv").config();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
-
+app.use("/media", express.static(path.join(__dirname, "media")));
 app.use(passport.initialize());
 passport.use("local", localStrategy);
 passport.use("jwt", jwtStrategy);

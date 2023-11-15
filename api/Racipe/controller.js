@@ -14,17 +14,18 @@ exports.getAllRacipes = async (req, res, next) => {
 };
 
 exports.createRacipe = async (req, res, next) => {
-  console.log(req.user);
   try {
     req.body.user = req.user._id;
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
     const recipe = await Recipe.create(req.body);
-    const ids = recipe.categories;
-    const getCategories = await Categorie.find({
-      _id: { $in: ids },
-    });
-    getCategories.forEach(async (category) => {
-      await category.updateOne({ $push: { recipes: recipe } });
-    });
+
+    await Categorie.updateMany(
+      { _id: req.body.categories },
+      { $push: { recipes: recipe } }
+    );
+
     res.status(201).json(recipe);
   } catch (error) {
     next(error);
