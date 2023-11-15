@@ -11,7 +11,7 @@ const localStrategy = new LocalStrategy(
       return done({
         message: "Username or password is wrong! kindly to try again",
       });
-    const checkPassword = await bcrypt.compare(password, User.password);
+    const checkPassword = await bcrypt.compare(password, user.password);
     if (!checkPassword)
       return done({
         message: "Username or password is wrong! kindly to try again",
