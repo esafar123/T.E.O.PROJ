@@ -5,12 +5,20 @@ const {
   updateCategorie,
   deleteCategorie,
 } = require("./controller");
+const passport = require("passport");
 const router = express.Router();
 
 router.get("/", getAllCategories);
 router.post("/", createCategorie);
-router.put("/:CategorieId", updateCategorie);
+router.put(
+  "/:CategorieId",
+  passport.authenticate("jwt", { session: false }),
+  updateCategorie
+);
 // category should never be delted
-router.delete("/:CategorieId", deleteCategorie);
-
+router.delete(
+  "/:CategorieId",
+  passport.authenticate("jwt", { session: false }),
+  updateCategorie
+);
 module.exports = router;
