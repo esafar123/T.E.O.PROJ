@@ -7,10 +7,11 @@ const {
   signin,
 } = require("./controller");
 const passport = require("passport");
+const upload = require("../../middleware/multer");
 const router = express.Router();
 
 router.get("/", getAllUsers);
-router.post("/signup", signup);
+router.post("/signup", upload.single("image"), signup);
 router.post(
   "/signin",
   passport.authenticate("local", { session: false }),

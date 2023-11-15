@@ -5,7 +5,8 @@ const RecipeSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
   image: String,
   categories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
-  ingredient: String,
+  description: String,
+  ingredients: String,
 });
 
 module.exports = model("Recipe", RecipeSchema);
